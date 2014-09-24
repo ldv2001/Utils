@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Utils
+namespace Utils.Text
 {
     /// <summary>
-    /// Class dedicated to Text util functions
+    /// Class dedicated to comparison text functions
     /// </summary>
-    public static class Text
+    public static class Comparison
     {
         /// <summary>
         /// A case insensitive comparison function
@@ -19,8 +19,8 @@ namespace Utils
         /// <returns></returns>
         public static bool CaseInsensitiveComparison(String str1, String str2)
         {
-            str1 = RemoveDiacritics(str1.ToLower());
-            str2 = RemoveDiacritics(str2.ToLower());
+            str1 = SpecialChars.RemoveDiacritics(str1.ToLower());
+            str2 = SpecialChars.RemoveDiacritics(str2.ToLower());
             if (str1 == str2)
             {
                 return true;
@@ -29,17 +29,6 @@ namespace Utils
             {
                 return false;
             }
-        }
-
-        /// <summary>
-        /// Function to remove diacritics in a String
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
-        public static String RemoveDiacritics(String str)
-        {
-            byte[] tab = System.Text.Encoding.GetEncoding(1251).GetBytes(str);
-            return System.Text.Encoding.ASCII.GetString(tab);
         }
     }
 }

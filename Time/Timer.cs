@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Threading;
 
-namespace Utils.Timer
+namespace Utils.Time
 {
     public class Timer : INotifyPropertyChanged
     {
