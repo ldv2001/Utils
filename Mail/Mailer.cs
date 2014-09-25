@@ -25,6 +25,7 @@ namespace Utils.Mail
                 IsBodyHtml = true,
                 BodyEncoding = Encoding.UTF8,
                 SubjectEncoding = Encoding.UTF8,
+                Subject = title
             };
         }
 
@@ -251,11 +252,7 @@ namespace Utils.Mail
         {
             try
             {
-#if DEBUG
-                    Console.WriteLine("Sent mail :" + _email.ToString());
-#else
                 _smtp.Send(_email);
-#endif
                 return true;
             }
             catch (Exception ex)
