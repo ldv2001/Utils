@@ -227,7 +227,11 @@ namespace Utils.Mail
             {
                 try
                 {
+#if DEBUG
+                    Console.WriteLine("Sent mail :" + _email.ToString());
+#else
                     _smtp.Send(_email);
+#endif
                     return true;
                 }
                 catch (Exception ex)
