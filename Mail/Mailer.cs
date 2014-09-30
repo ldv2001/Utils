@@ -238,10 +238,11 @@ namespace Utils.Mail
         /// </summary>
         /// <param name="ms">Fichier</param>
         /// <param name="fileName">Nom</param>
-        public void SetAttachement(Stream ms, string fileName)
+        public long SetAttachement(Stream ms, string fileName)
         {
             var attachement = new Attachment(ms, fileName);
             _email.Attachments.Add(attachement);
+            return ms.Length;
         }
 
         /// <summary>
