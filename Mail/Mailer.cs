@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Security;
 using System.Text;
 
 namespace Utils.Mail
@@ -83,7 +81,7 @@ namespace Utils.Mail
         /// <param name="email">The email.</param>
         public void SetFrom(string email)
         {
-            this._email.From = new MailAddress(email);
+            _email.From = new MailAddress(email);
         }
 
         /// <summary>

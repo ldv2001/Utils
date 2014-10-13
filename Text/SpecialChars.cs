@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace Utils.Text
@@ -17,8 +15,8 @@ namespace Utils.Text
         /// <returns></returns>
         public static String RemoveDiacritics(String str)
         {
-            byte[] tab = System.Text.Encoding.GetEncoding(1251).GetBytes(str);
-            return System.Text.Encoding.ASCII.GetString(tab);
+            var tab = Encoding.GetEncoding(1251).GetBytes(str);
+            return Encoding.ASCII.GetString(tab);
         }
     }
 }

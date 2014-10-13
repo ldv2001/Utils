@@ -68,7 +68,7 @@ namespace Utils.Time
         public event EventHandler CountdownEnd;
         private void NotifyCountdownEnd()
         {
-            EventHandler handler = CountdownEnd;
+            var handler = CountdownEnd;
             if (null != handler)
             {
                 handler(this, new EventArgs());
@@ -78,7 +78,7 @@ namespace Utils.Time
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
+            var handler = PropertyChanged;
             if (handler != null)
             {
                 handler(this, new PropertyChangedEventArgs(name));
