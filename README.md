@@ -14,11 +14,15 @@ Current Methods
 ===============
 
 - Text
-    - Comparison
-        - Case insensitive comparison
-    - Special Chars Operations     
-        - Remove diacritics
+  - Comparison
+    - Case insensitive comparison
+  - Special Chars Operations
+    - Remove diacritics
 - Time
-    - Timer
+  - Timer
 - Mail
-    -Mailer
+  - Mailer
+- WPF
+  - Window
+    - CenterWindow (extension method on type System.Windows.Window)
+    
