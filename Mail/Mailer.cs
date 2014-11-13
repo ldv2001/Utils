@@ -9,7 +9,7 @@ namespace Utils.Mail
 {
     public class Mailer
     {
-        private MailMessage _email;
+        private readonly MailMessage _email;
         private static SmtpClient _smtp;
 
         /// <summary>
