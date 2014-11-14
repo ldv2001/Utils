@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace Utils.WPF
 {
-    public static class Window
+    public static class WindowExtensions
     {
 
         /// <summary>
