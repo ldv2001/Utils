@@ -49,7 +49,7 @@
     <Compile Include="Mail\Mailer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Text\Comparison.cs" />
-    <Compile Include="Text\SpecialChars.cs" />
+    <Compile Include="Text\StringOperations.cs" />
     <Compile Include="Time\Timer.cs" />
     <Compile Include="WPF\WindowExtensions.cs" />
   </ItemGroup>

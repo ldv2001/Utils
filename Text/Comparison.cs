@@ -15,8 +15,8 @@ namespace Utils.Text
         /// <returns></returns>
         public static bool CaseInsensitiveComparison(String str1, String str2)
         {
-            str1 = SpecialChars.RemoveDiacritics(str1.ToLower());
-            str2 = SpecialChars.RemoveDiacritics(str2.ToLower());
+            str1 = StringOperations.RemoveDiacritics(str1.ToLower());
+            str2 = StringOperations.RemoveDiacritics(str2.ToLower());
             if (str1 == str2)
             {
                 return true;
