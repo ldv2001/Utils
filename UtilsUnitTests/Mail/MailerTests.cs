@@ -3,11 +3,12 @@
 namespace UtilsUnitTests.Mail
 {
     [TestClass]
-    public class UnitTest1
+    public class MailerTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void MailStub()
         {
+            Assert.IsTrue(true);
         }
     }
 }
