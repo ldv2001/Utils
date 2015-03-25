@@ -8,7 +8,6 @@ namespace UtilsUnitTests.Time
     [TestClass]
     public class TimerTests
     {
-        private static Boolean stopped = false;
         [TestMethod]
         public void TestCountdownStubbed()
         {
