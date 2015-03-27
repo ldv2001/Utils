@@ -22,8 +22,14 @@ namespace Utils.WPF
     /// </summary>
     public partial class FilePicker : UserControl, INotifyPropertyChanged
     {
+        public enum Behaviour
+        {
+            OneFile,
+            MultiFile,
+            Save
+        }
 
-
+        public Behaviour Type { get; set; }
 
         public String FilePath
         {
@@ -48,6 +54,20 @@ namespace Utils.WPF
             DependencyProperty.Register("ButtonContent", typeof(Object), typeof(FilePicker), new PropertyMetadata(0));
 
 
+
+
+        public String Title
+        {
+            get { return (String)GetValue(TitleProperty); }
+            set { SetValueDp(TitleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Title.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TitleProperty =
+            DependencyProperty.Register("Title", typeof(String), typeof(FilePicker), new PropertyMetadata(""));
+
+
+
         private void SetValueDp(DependencyProperty property, object value, [CallerMemberName] String p = null)
         {
             SetValue(property, value);
@@ -57,26 +77,40 @@ namespace Utils.WPF
 
         public FilePicker()
         {
+            this.Type = Behaviour.OneFile;
             InitializeComponent();
         }
 
         private void BrowseKeyButton_Click(object sender, RoutedEventArgs e)
         {
-            var ofd = GetOpenFileDialog("Ouvrir");//TODO : Localize
+            var ofd = GetOpenFileDialog("Ouvrir", this.Type == Behaviour.MultiFile);//TODO : Localize
             ofd.ShowDialog();
             FilePath = ofd.FileName;
         }
 
-        public static OpenFileDialog GetOpenFileDialog(String title, Boolean multipleFiles = false)
+        FileDialog GetOpenFileDialog(String title, Boolean multipleFiles = false)
         {
-            return new OpenFileDialog()
+            if (Type != Behaviour.Save)
             {
-                CheckFileExists = true,
-                CheckPathExists = true,
-                DereferenceLinks = true,
-                Multiselect = multipleFiles,
+                return new OpenFileDialog()
+                {
+                    CheckFileExists = true,
+                    CheckPathExists = true,
+                    DereferenceLinks = true,
+                    Multiselect = multipleFiles,
+                    RestoreDirectory = true,
+                    Title = title
+                };
+
+            }
+            return new SaveFileDialog()
+            {
+                OverwritePrompt = true,
+                ValidateNames = true,
+                Title = title,
                 RestoreDirectory = true,
-                Title = title
+                DereferenceLinks = true,
+                CheckPathExists = true
             };
         }
 
