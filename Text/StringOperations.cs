@@ -41,7 +41,7 @@ namespace Utils.Text
         /// <returns>True if empty, false otherwise</returns>
         public static Boolean IsEmpty(this String str)
         {
-            return str.Equals(String.Empty);
+            return str == null || str.Equals(String.Empty);
         }
     }
 }
