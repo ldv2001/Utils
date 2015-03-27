@@ -22,28 +22,38 @@ namespace Utils.WPF
     /// </summary>
     public partial class FilePicker : UserControl, INotifyPropertyChanged
     {
-        private String _filePath;
-        private Object _buttonContent;
 
-        public Object ButtonContent
-        {
-            get { return _buttonContent; }
-            set
-            {
-                _buttonContent = value;
-                OnPropertyChanged();
-            }
-        }
+
 
         public String FilePath
         {
-            get { return _filePath; }
-            set
-            {
-                _filePath = value;
-                OnPropertyChanged();
-            }
+            get { return (String)GetValue(FilePathProperty); }
+            set { SetValueDp(FilePathProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for FilePath.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FilePathProperty =
+            DependencyProperty.Register("FilePath", typeof(String), typeof(FilePicker), new PropertyMetadata(""));
+
+
+
+        public Object ButtonContent
+        {
+            get { return GetValue(ButtonContentProperty); }
+            set { SetValueDp(ButtonContentProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ButtonContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ButtonContentProperty =
+            DependencyProperty.Register("ButtonContent", typeof(Object), typeof(FilePicker), new PropertyMetadata(0));
+
+
+        private void SetValueDp(DependencyProperty property, object value, [CallerMemberName] String p = null)
+        {
+            SetValue(property, value);
+            OnPropertyChanged(p);
+        }
+
 
         public FilePicker()
         {
@@ -74,7 +84,7 @@ namespace Utils.WPF
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void OnPropertyChanged(string propertyName = null)
         {
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
