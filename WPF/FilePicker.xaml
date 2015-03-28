@@ -10,6 +10,7 @@
     <UserControl.Resources>
         <Style TargetType="{x:Type Button}" x:Key="ButtonStyle">
             <Setter Property="Padding" Value="5,0"/>
+            <Setter Property="Margin" Value="0"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
@@ -20,6 +21,6 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <TextBox  VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="0" Text="{Binding FilePath}" IsEnabled="False" BorderThickness="1,1,0,1"/>
-        <Button Grid.Column="1" Content="{Binding ButtonContent}" Style="{StaticResource ButtonStyle}" Click="BrowseKeyButton_Click" Margin="0"/><!--TODO: Localize default value-->
+        <Button Grid.Column="1" Content="{Binding ButtonContent}" Style="{StaticResource ButtonStyle}" Click="BrowseKeyButton_Click"/><!--TODO: Localize default value-->
     </Grid>
 </UserControl>
