@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.Win32;
+using Utils.WPF.Resources.Lang;
 
 namespace Utils.WPF
 {
@@ -29,7 +20,19 @@ namespace Utils.WPF
             Save
         }
 
-        public Behaviour Type { get; set; }
+
+
+        public Behaviour Type
+        {
+            get { return (Behaviour)GetValue(TypeProperty); }
+            set { SetValueDp(TypeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Type.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TypeProperty =
+            DependencyProperty.Register("Type", typeof(Behaviour), typeof(FilePicker), new PropertyMetadata(Behaviour.OneFile));
+
+
 
         public String FilePath
         {
@@ -39,7 +42,7 @@ namespace Utils.WPF
 
         // Using a DependencyProperty as the backing store for FilePath.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FilePathProperty =
-            DependencyProperty.Register("FilePath", typeof(String), typeof(FilePicker), new PropertyMetadata(""));
+            DependencyProperty.Register("FilePath", typeof(String), typeof(FilePicker), new PropertyMetadata(Strings.BrowseButton));
 
 
 
@@ -77,19 +80,22 @@ namespace Utils.WPF
 
         public FilePicker()
         {
-            this.Type = Behaviour.OneFile;
             InitializeComponent();
         }
 
         private void BrowseKeyButton_Click(object sender, RoutedEventArgs e)
         {
-            var ofd = GetOpenFileDialog("Ouvrir", this.Type == Behaviour.MultiFile);//TODO : Localize
+            var ofd = GetOpenFileDialog(Title, this.Type == Behaviour.MultiFile);
             ofd.ShowDialog();
             FilePath = ofd.FileName;
         }
 
         FileDialog GetOpenFileDialog(String title, Boolean multipleFiles = false)
         {
+            if (String.IsNullOrEmpty(title))
+            {
+                title = (Type == Behaviour.Save) ? Strings.Save : Strings.Open;
+            }
             if (Type != Behaviour.Save)
             {
                 return new OpenFileDialog()
