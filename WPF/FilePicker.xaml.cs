@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
+using Utils.Events;
 using Utils.WPF.Resources.Lang;
 
 namespace Utils.WPF
@@ -20,8 +21,6 @@ namespace Utils.WPF
             Save
         }
 
-
-
         public Behaviour Type
         {
             get { return (Behaviour)GetValue(TypeProperty); }
@@ -32,8 +31,6 @@ namespace Utils.WPF
         public static readonly DependencyProperty TypeProperty =
             DependencyProperty.Register("Type", typeof(Behaviour), typeof(FilePicker), new PropertyMetadata(Behaviour.OneFile));
 
-
-
         public String FilePath
         {
             get { return (String)GetValue(FilePathProperty); }
@@ -42,9 +39,7 @@ namespace Utils.WPF
 
         // Using a DependencyProperty as the backing store for FilePath.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FilePathProperty =
-            DependencyProperty.Register("FilePath", typeof(String), typeof(FilePicker), new PropertyMetadata(Strings.BrowseButton));
-
-
+            DependencyProperty.Register("FilePath", typeof(String), typeof(FilePicker), new PropertyMetadata(""));
 
         public Object ButtonContent
         {
@@ -54,10 +49,7 @@ namespace Utils.WPF
 
         // Using a DependencyProperty as the backing store for ButtonContent.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ButtonContentProperty =
-            DependencyProperty.Register("ButtonContent", typeof(Object), typeof(FilePicker), new PropertyMetadata(0));
-
-
-
+            DependencyProperty.Register("ButtonContent", typeof(Object), typeof(FilePicker), new PropertyMetadata(Strings.BrowseButton));
 
         public String Title
         {
@@ -68,15 +60,6 @@ namespace Utils.WPF
         // Using a DependencyProperty as the backing store for Title.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register("Title", typeof(String), typeof(FilePicker), new PropertyMetadata(""));
-
-
-
-        private void SetValueDp(DependencyProperty property, object value, [CallerMemberName] String p = null)
-        {
-            SetValue(property, value);
-            OnPropertyChanged(p);
-        }
-
 
         public FilePicker()
         {
@@ -120,6 +103,12 @@ namespace Utils.WPF
             };
         }
 
+        private void SetValueDp(DependencyProperty property, object value, [CallerMemberName] String p = null)
+        {
+            SetValue(property, value);
+            OnPropertyChanged(p);
+        }
+
         #region Default Implementation of INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -129,7 +118,6 @@ namespace Utils.WPF
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
-
 
         #endregion
     }
