@@ -13,13 +13,26 @@ namespace Utils.Text
         /// Function to remove diacritics in a String
         /// </summary>
         /// <param name="str"></param>
+        /// <param name="codePage"></param>
         /// <returns></returns>
         public static String RemoveDiacritics(this String str)
         {
-            var tab = Encoding.GetEncoding(1251).GetBytes(str);
-            return Encoding.ASCII.GetString(tab);
+            return str.ReEncodeString("windows-1251", "us-ascii");
         }
 
+
+        /// <summary>
+        /// Reencodes the string
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <param name="sourceEncoding">The source encoding.</param>
+        /// <param name="destEncoding">The dest encoding.</param>
+        /// <returns></returns>
+        public static String ReEncodeString(this String str, String sourceEncoding, String destEncoding)
+        {
+            var tab = Encoding.GetEncoding(sourceEncoding).GetBytes(str);
+            return Encoding.GetEncoding(destEncoding).GetString(tab);
+        }
 
         /// <summary>
         /// Allows to use <see cref="Regex.Replace(string,string,string,System.Text.RegularExpressions.RegexOptions)"/> directly on a String
