@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace Utils.Misc
 {
     public static class Misc

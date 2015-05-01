@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
-using Utils.Events;
 using Utils.WPF.Resources.Lang;
 
 namespace Utils.WPF
