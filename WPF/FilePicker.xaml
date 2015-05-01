@@ -6,7 +6,10 @@
              xmlns:local="clr-namespace:Utils.WPF" x:Class="Utils.WPF.FilePicker" 
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             AllowDrop="True"
+             DragOver="FilePicker_OnDragOver"
+             Drop="FilePicker_OnDrop">
     <UserControl.Resources>
         <Style TargetType="{x:Type Button}" x:Key="ButtonStyle">
             <Setter Property="Padding" Value="5,0"/>

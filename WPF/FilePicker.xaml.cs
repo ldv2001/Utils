@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,6 +43,21 @@ namespace Utils.WPF
         public static readonly DependencyProperty FilePathProperty =
             DependencyProperty.Register("FilePath", typeof(String), typeof(FilePicker), new PropertyMetadata(""));
 
+
+
+        public String[] FilePathes
+        {
+            get { return (String[])GetValue(FilePathesProperty); }
+            set { SetValue(FilePathesProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for FilePathes.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FilePathesProperty =
+            DependencyProperty.Register("FilePathes", typeof(String[]), typeof(FilePicker), new PropertyMetadata(new String[] { }));
+
+
+
+
         public Object ButtonContent
         {
             get { return GetValue(ButtonContentProperty); }
@@ -70,7 +87,15 @@ namespace Utils.WPF
         {
             var ofd = GetOpenFileDialog(Title, this.Type == Behaviour.MultiFile);
             ofd.ShowDialog();
-            FilePath = ofd.FileName;
+            if (Type == Behaviour.OneFile || Type == Behaviour.Save)
+            {
+                FilePath = ofd.FileName;
+            }
+            else if (Type == Behaviour.MultiFile)
+            {
+                FilePathes = ofd.FileNames;
+                FilePath = FilePathes[0];
+            }
         }
 
         FileDialog GetOpenFileDialog(String title, Boolean multipleFiles = false)
@@ -120,5 +145,56 @@ namespace Utils.WPF
         }
 
         #endregion
+
+        private void FilePicker_OnDrop(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
+
+            String[] dataStrings = (String[])e.Data.GetData(DataFormats.FileDrop);
+
+            switch (Type)
+            {
+                case Behaviour.OneFile:
+                    if (dataStrings.Length == 1 && File.Exists(dataStrings[0]))
+                    {
+                        FilePath = dataStrings[0];
+                        FilePathes = dataStrings;
+                    }
+                    break;
+                case Behaviour.MultiFile:
+                    if (dataStrings.All(s => File.Exists(s) || Directory.Exists(s)))
+                    {
+                        FilePath = dataStrings[0];
+                        FilePathes = dataStrings;
+                    }
+                    break;
+            }
+
+        }
+
+        private void FilePicker_OnDragOver(object sender, DragEventArgs e)
+        {
+            e.Effects = DragDropEffects.None;
+
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
+
+            String[] dataStrings = (String[])e.Data.GetData(DataFormats.FileDrop);
+
+            switch (Type)
+            {
+                case Behaviour.OneFile:
+                    if (dataStrings.Length == 1 && File.Exists(dataStrings[0]))
+                    {
+                        e.Effects = DragDropEffects.Link;
+                    }
+                    break;
+                case Behaviour.MultiFile:
+                    if (dataStrings.All(s => File.Exists(s) || Directory.Exists(s)))
+                    {
+                        e.Effects = DragDropEffects.Link;
+                    }
+                    break;
+            }
+        }
     }
 }
