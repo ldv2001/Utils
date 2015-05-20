@@ -17,14 +17,7 @@ namespace Utils.Text
         {
             str1 = StringOperations.RemoveDiacritics(str1.ToLower());
             str2 = StringOperations.RemoveDiacritics(str2.ToLower());
-            if (str1 == str2)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return str1 == str2;
         }
     }
 }
