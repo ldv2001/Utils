@@ -24,7 +24,7 @@ namespace UtilsUnitTests.Text
         public void IsEmptyTest()
         {
             Assert.IsTrue("".IsEmpty());
-            Assert.IsFalse(" ".IsEmpty());
+            Assert.IsTrue(" ".IsEmpty());
             Assert.IsFalse("a".IsEmpty());
         }
     }
