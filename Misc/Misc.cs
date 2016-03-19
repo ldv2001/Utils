@@ -19,5 +19,18 @@ namespace Utils.Misc
             String pre = (si ? "kMGTPE" : "KMGTPE")[(exp - 1)] + (si ? "" : "i");
             return String.Format("{0} {1}{2}", Math.Round(bytes / Math.Pow(unit, exp), precision), pre, si ? "b" : "B");
         }
+
+        /// <summary>
+        /// Will execute the action only if the condition is false
+        /// </summary>
+        /// <param name="condition">the condition to evaluate</param>
+        /// <param name="action">the action to run</param>
+        public static void Unless(Boolean condition, Action action)
+        {
+            if (!condition)
+            {
+                action.Invoke();
+            }
+        }
     }
 }
