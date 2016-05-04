@@ -60,6 +60,7 @@
     <Compile Include="Misc\Misc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Misc\TupleExtensions.cs" />
+    <Compile Include="Reflection\ObjectExtensions.cs" />
     <Compile Include="Text\Comparison.cs" />
     <Compile Include="Text\StringOperations.cs" />
     <Compile Include="Time\Timer.cs" />
