@@ -95,7 +95,7 @@ namespace Utils.WPF
         {
             if (this.Type == Behaviour.Folder)
             {
-                var fbd = new FolderBrowserDialog() { RootFolder = Environment.SpecialFolder.MyDocuments, };
+                var fbd = new FolderBrowserDialog() { RootFolder = Environment.SpecialFolder.MyComputer };
                 fbd.ShowDialog();
                 this.FilePath = fbd.SelectedPath;
                 return;
