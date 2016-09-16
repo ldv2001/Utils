@@ -6,8 +6,6 @@
              xmlns:local="clr-namespace:Utils.WPF" x:Class="Utils.WPF.FilePicker" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             MinHeight="{Binding ElementName=BrowseButton, Mode=OneWay}"
-             MinWidth="{Binding ElementName=BrowseButton, Mode=OneWay}"
              AllowDrop="True"
              DragOver="FilePicker_OnDragOver"
              Drop="FilePicker_OnDrop">
