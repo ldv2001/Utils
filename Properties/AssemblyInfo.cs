@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
 [assembly: AssemblyTitle("Utils")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A small utility library")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Antoine-Ali Zarrouk")]
 [assembly: AssemblyProduct("Utils")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
