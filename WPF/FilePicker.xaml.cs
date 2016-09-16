@@ -4,9 +4,17 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
-using Microsoft.Win32;
+using System.Windows.Forms;
+
 using Utils.WPF.Resources.Lang;
+
+using DataFormats = System.Windows.DataFormats;
+using DragDropEffects = System.Windows.DragDropEffects;
+using DragEventArgs = System.Windows.DragEventArgs;
+using FileDialog = Microsoft.Win32.FileDialog;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
+using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace Utils.WPF
 {
@@ -19,7 +27,8 @@ namespace Utils.WPF
         {
             OneFile,
             MultiFile,
-            Save
+            Save,
+            Folder
         }
 
         public Behaviour Type
@@ -84,6 +93,14 @@ namespace Utils.WPF
 
         private void BrowseKeyButton_Click(object sender, RoutedEventArgs e)
         {
+            if (this.Type == Behaviour.Folder)
+            {
+                var fbd = new FolderBrowserDialog() { RootFolder = Environment.SpecialFolder.MyDocuments, };
+                fbd.ShowDialog();
+                this.FilePath = fbd.SelectedPath;
+                return;
+            }
+
             var ofd = GetOpenFileDialog(Title, this.Type == Behaviour.MultiFile);
             ofd.ShowDialog();
             if (Type == Behaviour.OneFile || Type == Behaviour.Save)
