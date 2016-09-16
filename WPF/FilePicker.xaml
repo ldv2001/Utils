@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Utils.WPF" x:Class="Utils.WPF.FilePicker" 
              mc:Ignorable="d" 
-             DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="300" d:DesignWidth="300"
              AllowDrop="True"
              DragOver="FilePicker_OnDragOver"
@@ -23,7 +22,7 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <TextBox  VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="0" Text="{Binding FilePath}" IsEnabled="False" BorderThickness="1,1,0,1"/>
-        <Button Grid.Column="1" Content="{Binding ButtonContent}" Style="{StaticResource ButtonStyle}" Click="BrowseKeyButton_Click"/><!--TODO: Localize default value-->
+        <TextBox  VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="0" Text="{Binding FilePath, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:FilePicker}}}" IsEnabled="False" BorderThickness="1,1,0,1"/>
+        <Button Grid.Column="1" Content="{Binding ButtonContent, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:FilePicker}}}" Style="{StaticResource ButtonStyle}" Click="BrowseKeyButton_Click"/><!--TODO: Localize default value-->
     </Grid>
 </UserControl>

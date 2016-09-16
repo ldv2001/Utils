@@ -49,7 +49,7 @@ namespace Utils.WPF
 
         // Using a DependencyProperty as the backing store for FilePath.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FilePathProperty =
-            DependencyProperty.Register("FilePath", typeof(String), typeof(FilePicker), new PropertyMetadata(""));
+            DependencyProperty.Register("FilePath", typeof(String), typeof(FilePicker), new FrameworkPropertyMetadata("", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -61,7 +61,7 @@ namespace Utils.WPF
 
         // Using a DependencyProperty as the backing store for FilePathes.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FilePathesProperty =
-            DependencyProperty.Register("FilePathes", typeof(String[]), typeof(FilePicker), new PropertyMetadata(new String[] { }));
+            DependencyProperty.Register("FilePathes", typeof(String[]), typeof(FilePicker), new FrameworkPropertyMetadata(new String[] { }, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
