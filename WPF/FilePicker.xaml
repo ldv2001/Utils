@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Utils.WPF" x:Class="Utils.WPF.FilePicker" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="20" d:DesignWidth="300"
              AllowDrop="True"
              DragOver="FilePicker_OnDragOver"
              Drop="FilePicker_OnDrop">
@@ -22,7 +22,7 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <TextBox  VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="0" Text="{Binding FilePath, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:FilePicker}}}" IsEnabled="False" BorderThickness="1,1,0,1"/>
-        <Button x:Name="BrowseButton" Grid.Column="1" Content="{Binding ButtonContent, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:FilePicker}}}" Style="{StaticResource ButtonStyle}" Click="BrowseKeyButton_Click"/><!--TODO: Localize default value-->
+        <TextBox  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="0" Text="{Binding FilePath, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:FilePicker}}}" IsEnabled="False" BorderThickness="1,1,0,1"/>
+        <Button x:Name="BrowseButton" Grid.Column="1" Content="{Binding ButtonContent, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:FilePicker}}}" Style="{StaticResource ButtonStyle}" Click="BrowseKeyButton_Click" VerticalAlignment="Stretch"/><!--TODO: Localize default value-->
     </Grid>
 </UserControl>
