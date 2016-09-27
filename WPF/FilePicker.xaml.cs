@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Forms;
-
+using Utils.Events;
 using Utils.WPF.Resources.Lang;
 
 using DataFormats = System.Windows.DataFormats;
@@ -23,6 +23,9 @@ namespace Utils.WPF
     /// </summary>
     public partial class FilePicker : UserControl, INotifyPropertyChanged
     {
+        /// <summary>
+        /// List the different possible usages of the <see cref="FilePicker"/> user control
+        /// </summary>
         public enum Behaviour
         {
             OneFile,
@@ -31,61 +34,101 @@ namespace Utils.WPF
             Folder
         }
 
+        /// <summary>
+        /// Gets or Sets a value indicating which <see cref="Behaviour"/> is desired
+        /// </summary>
         public Behaviour Type
         {
             get { return (Behaviour)GetValue(TypeProperty); }
             set { SetValueDp(TypeProperty, value); }
         }
 
+        /// <summary>
+        /// <see cref="DependencyProperty"/> for the <see cref="Type"/> property
+        /// </summary>
         // Using a DependencyProperty as the backing store for Type.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TypeProperty =
             DependencyProperty.Register("Type", typeof(Behaviour), typeof(FilePicker), new PropertyMetadata(Behaviour.OneFile));
 
+        /// <summary>
+        /// Gets or sets the Selected path
+        /// </summary>
         public String FilePath
         {
             get { return (String)GetValue(FilePathProperty); }
-            set { SetValueDp(FilePathProperty, value); }
+            set
+                {
+                    SetValueDp(FilePathProperty, value);
+                    this.OnPathSelected(this, new EventArgs<string>(value));
+                }
         }
 
+        /// <summary>
+        /// <see cref="DependencyProperty"/> for the <see cref="FilePath"/> property
+        /// </summary>
         // Using a DependencyProperty as the backing store for FilePath.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FilePathProperty =
             DependencyProperty.Register("FilePath", typeof(String), typeof(FilePicker), new FrameworkPropertyMetadata("", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
-
+        /// <summary>
+        /// Gets or sets the selected pathes <br/>
+        /// Only used in cunjunction with the <see cref="Behaviour.MultiFile"/> <see cref="Type"/>
+        /// </summary>
         public String[] FilePathes
         {
             get { return (String[])GetValue(FilePathesProperty); }
-            set { SetValue(FilePathesProperty, value); }
+            set
+            {
+                SetValue(FilePathesProperty, value);
+                this.OnPathesSelected(this, new EventArgs<string[]>(value));
+            }
         }
 
+        /// <summary>
+        /// <see cref="DependencyProperty"/> for the <see cref="FilePathes"/> property
+        /// </summary>
         // Using a DependencyProperty as the backing store for FilePathes.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FilePathesProperty =
             DependencyProperty.Register("FilePathes", typeof(String[]), typeof(FilePicker), new FrameworkPropertyMetadata(new String[] { }, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
-
+        /// <summary>
+        /// Gets or Sets the button's content
+        /// </summary>
         public Object ButtonContent
         {
             get { return GetValue(ButtonContentProperty); }
             set { SetValueDp(ButtonContentProperty, value); }
         }
 
+        /// <summary>
+        /// <see cref="DependencyProperty"/> for the <see cref="ButtonContent"/> property
+        /// </summary>
         // Using a DependencyProperty as the backing store for ButtonContent.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ButtonContentProperty =
             DependencyProperty.Register("ButtonContent", typeof(Object), typeof(FilePicker), new PropertyMetadata(Strings.BrowseButton));
 
+        /// <summary>
+        /// Gets or Sets the title of the dialog opened on the button click
+        /// </summary>
         public String Title
         {
             get { return (String)GetValue(TitleProperty); }
             set { SetValueDp(TitleProperty, value); }
         }
 
+        /// <summary>
+        /// <see cref="DependencyProperty"/> for the <see cref="Title"/> property
+        /// </summary>
         // Using a DependencyProperty as the backing store for Title.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register("Title", typeof(String), typeof(FilePicker), new PropertyMetadata(""));
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FilePicker"/> class
+        /// </summary>
         public FilePicker()
         {
             InitializeComponent();
@@ -114,7 +157,7 @@ namespace Utils.WPF
             }
         }
 
-        FileDialog GetOpenFileDialog(String title, Boolean multipleFiles = false)
+        private FileDialog GetOpenFileDialog(String title, Boolean multipleFiles = false)
         {
             if (String.IsNullOrEmpty(title))
             {
@@ -150,8 +193,19 @@ namespace Utils.WPF
             OnPropertyChanged(p);
         }
 
+        /// <summary>
+        /// Event fired when a path is selected
+        /// </summary>
+        public event EventHandler<EventArgs<string>> OnPathSelected;
+
+        /// <summary>
+        /// Event fired when multiple pathes are selected
+        /// </summary>
+        public event EventHandler<EventArgs<string[]>> OnPathesSelected;
+
         #region Default Implementation of INotifyPropertyChanged
 
+        /// <inheritdoc/>
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName = null)

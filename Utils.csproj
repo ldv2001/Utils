@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Events\DynamicEventArgs.cs" />
+    <Compile Include="Events\GenericEventArgs.cs" />
     <Compile Include="Mail\Mailer.cs" />
     <Compile Include="Misc\Misc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
