@@ -57,10 +57,10 @@ namespace Utils.WPF
         {
             get { return (String)GetValue(FilePathProperty); }
             set
-                {
-                    SetValueDp(FilePathProperty, value);
-                    this.OnPathSelected(this, new EventArgs<string>(value));
-                }
+            {
+                SetValueDp(FilePathProperty, value);
+                this.OnPathSelected?.Invoke(this, new EventArgs<string>(value));
+            }
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Utils.WPF
             set
             {
                 SetValue(FilePathesProperty, value);
-                this.OnPathesSelected(this, new EventArgs<string[]>(value));
+                this.OnPathesSelected?.Invoke(this, new EventArgs<string[]>(value));
             }
         }
 
