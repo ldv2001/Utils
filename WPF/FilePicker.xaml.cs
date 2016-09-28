@@ -59,7 +59,7 @@ namespace Utils.WPF
             set
             {
                 SetValueDp(FilePathProperty, value);
-                this.OnPathSelected?.Invoke(this, new EventArgs<string>(value));
+                if (this.OnPathSelected != null) this.OnPathSelected.Invoke(this, new EventArgs<string>(value));
             }
         }
 
@@ -81,7 +81,7 @@ namespace Utils.WPF
             set
             {
                 SetValue(FilePathesProperty, value);
-                this.OnPathesSelected?.Invoke(this, new EventArgs<string[]>(value));
+                if (this.OnPathesSelected != null) this.OnPathesSelected.Invoke(this, new EventArgs<string[]>(value));
             }
         }
 
