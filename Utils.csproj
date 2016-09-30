@@ -101,6 +101,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="README.md" />
     <None Include="Utils.nuspec" />
     <None Include="Utils.snk" />
   </ItemGroup>

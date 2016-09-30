@@ -14,7 +14,7 @@ namespace Utils.Text
         /// </summary>
         /// <param name="str"></param>
         /// <param name="codePage"></param>
-        /// <returns></returns>
+        /// <returns>A string without any diacritics</returns>
         public static String RemoveDiacritics(this String str)
         {
             return str.ReEncodeString("windows-1251", "us-ascii");
@@ -22,12 +22,12 @@ namespace Utils.Text
 
 
         /// <summary>
-        /// Reencodes the string
+        /// Re-decode the strings
         /// </summary>
         /// <param name="str">The string.</param>
         /// <param name="sourceEncoding">The source encoding.</param>
         /// <param name="destEncoding">The dest encoding.</param>
-        /// <returns></returns>
+        /// <returns>A string read from the bytes using the new encoding</returns>
         public static String ReEncodeString(this String str, String sourceEncoding, String destEncoding)
         {
             var tab = Encoding.GetEncoding(sourceEncoding).GetBytes(str);
@@ -41,7 +41,7 @@ namespace Utils.Text
         /// <param name="pattern">The Regexp to apply</param>
         /// <param name="replacement">The replacement expression</param>
         /// <param name="options">Regular Expression engine options</param>
-        /// <returns></returns>
+        /// <returns>The result of the replacement pattern</returns>
         public static String RegExpReplace(this String input, String pattern, String replacement, RegexOptions options = RegexOptions.None)
         {
             return Regex.Replace(input, pattern, replacement, options);
