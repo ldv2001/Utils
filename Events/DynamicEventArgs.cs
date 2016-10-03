@@ -4,7 +4,7 @@ using System.Dynamic;
 namespace Utils.Events
 {
     /// <summary>
-    /// Class containing an <see cref="dynamic"/> field, effectively allowing anonymous types to be used as events parameters
+    /// Class containing an <code>dynamic</code> field, effectively allowing anonymous types to be used as events parameters
     /// </summary>
     public class DynamicEventArgs : EventArgs
     {

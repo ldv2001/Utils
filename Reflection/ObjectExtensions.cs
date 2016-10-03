@@ -4,19 +4,22 @@ using System.Reflection;
 
 namespace Utils.Reflection
 {
+    /// <summary>
+    /// Class containing extension methods targeting objects
+    /// </summary>
     public static class ObjectExtensions
     {
         /// <summary>
-        /// Méthode permettant d'obtenir les informations d'une propriété de classe
+        /// Method allowing to obtain informations about an object's property
         /// </summary>
         /// <remarks>
         /// Created by : Cameron MacFarland @ http://stackoverflow.com/a/672212/2245256
         /// </remarks>
-        /// <typeparam name="TSource"></typeparam>
-        /// <typeparam name="TProperty"></typeparam>
-        /// <param name="source"></param>
-        /// <param name="propertyLambda"></param>
-        /// <returns></returns>
+        /// <typeparam name="TSource">The object type holding the property</typeparam>
+        /// <typeparam name="TProperty">The targeted property type</typeparam>
+        /// <param name="source">THe source object</param>
+        /// <param name="propertyLambda">An expression describing how to get to the property from the source object</param>
+        /// <returns>A <see cref="PropertyInfo"/> describing the property</returns>
         public static PropertyInfo GetPropertyInfo<TSource, TProperty>(
             this TSource source,
             Expression<Func<TSource, TProperty>> propertyLambda)

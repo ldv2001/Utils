@@ -2,12 +2,14 @@
 
 namespace Utils.WPF
 {
+    /// <summary>
+    /// A class containing extension methods for the <see cref="Window"/> class
+    /// </summary>
     public static class WindowExtensions
     {
 
         /// <summary>
         /// Centers the window.
-        /// Extends any window
         /// </summary>
         /// <param name="window">The window.</param>
         /// @author : Wild_A (http://stackoverflow.com/users/621044/wild-a)

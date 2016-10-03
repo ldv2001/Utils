@@ -28,9 +28,24 @@ namespace Utils.WPF
         /// </summary>
         public enum Behaviour
         {
+            /// <summary>
+            /// Allows to pick one file
+            /// </summary>
             OneFile,
+
+            /// <summary>
+            /// Allows to pick multiple files
+            /// </summary>
             MultiFile,
+
+            /// <summary>
+            /// Allows to choose where to save a file
+            /// </summary>
             Save,
+
+            /// <summary>
+            /// Allows to choose a directory
+            /// </summary>
             Folder
         }
 
@@ -134,7 +149,7 @@ namespace Utils.WPF
             InitializeComponent();
         }
 
-        private void BrowseKeyButton_Click(object sender, RoutedEventArgs e)
+        private void BrowseKeyButtonClick(object sender, RoutedEventArgs e)
         {
             if (this.Type == Behaviour.Folder)
             {
@@ -144,16 +159,17 @@ namespace Utils.WPF
                 return;
             }
 
-            var ofd = GetOpenFileDialog(Title, this.Type == Behaviour.MultiFile);
+            var ofd = this.GetOpenFileDialog(Title, this.Type == Behaviour.MultiFile);
             ofd.ShowDialog();
-            if (Type == Behaviour.OneFile || Type == Behaviour.Save)
+
+            if (this.Type == Behaviour.OneFile || Type == Behaviour.Save)
             {
-                FilePath = ofd.FileName;
+                this.FilePath = ofd.FileName;
             }
-            else if (Type == Behaviour.MultiFile)
+            else if (this.Type == Behaviour.MultiFile)
             {
-                FilePathes = ofd.FileNames;
-                FilePath = FilePathes[0];
+                this.FilePathes = ofd.FileNames;
+                this.FilePath = this.FilePathes[0];
             }
         }
 
