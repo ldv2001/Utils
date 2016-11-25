@@ -22,7 +22,7 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <TextBox  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="0" Text="{Binding FilePath, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:FilePicker}}}" IsEnabled="False" BorderThickness="1,1,0,1"/>
+        <TextBox  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="0" Text="{Binding FilePath, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:FilePicker}}}" IsEnabled="False" BorderThickness="1,1,0,1" TextAlignment="Center"/>
         <Button x:Name="BrowseButton" Grid.Column="1" Content="{Binding ButtonContent, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:FilePicker}}}" Style="{StaticResource ButtonStyle}" Click="BrowseKeyButtonClick" VerticalAlignment="Stretch" Padding="5,2"/><!--TODO: Localize default value-->
     </Grid>
 </UserControl>
