@@ -16,7 +16,7 @@ using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 using UserControl = System.Windows.Controls.UserControl;
 
-namespace Utils.WPF
+namespace Utils
 {
     /// <summary>
     /// Logique d'interaction pour FilePicker.xaml
