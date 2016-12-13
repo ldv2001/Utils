@@ -67,6 +67,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enumerables\EnumerablesExtension.cs" />
     <Compile Include="Enums\EnumExtensions.cs" />
     <Compile Include="Events\DynamicEventArgs.cs" />
     <Compile Include="Events\GenericEventArgs.cs" />
