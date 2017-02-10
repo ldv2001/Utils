@@ -254,6 +254,13 @@ namespace Utils.WPF
                         FilePathes = dataStrings;
                     }
                     break;
+                case Behaviour.Folder:
+                    if (dataStrings.Length == 1 && Directory.Exists(dataStrings[0]))
+                    {
+                        FilePath = dataStrings[0];
+                        FilePathes = dataStrings;
+                    }
+                    break;
             }
 
         }
