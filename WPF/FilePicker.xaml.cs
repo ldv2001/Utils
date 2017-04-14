@@ -154,13 +154,18 @@ namespace Utils.WPF
             if (this.Type == Behaviour.Folder)
             {
                 var fbd = new FolderBrowserDialog() { RootFolder = Environment.SpecialFolder.MyComputer };
-                fbd.ShowDialog();
+                var result = fbd.ShowDialog();
+
+                if (result == DialogResult.Cancel) return;
+
                 this.FilePath = fbd.SelectedPath;
                 return;
             }
 
             var ofd = this.GetOpenFileDialog(Title, this.Type == Behaviour.MultiFile);
-            ofd.ShowDialog();
+            var fResult = ofd.ShowDialog();
+
+            if (!fResult.HasValue || !fResult.Value) return;
 
             if (this.Type == Behaviour.OneFile || Type == Behaviour.Save)
             {
