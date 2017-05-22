@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -42,7 +43,7 @@ namespace Utils.Text
         /// <param name="replacement">The replacement expression</param>
         /// <param name="options">Regular Expression engine options</param>
         /// <returns>The result of the replacement pattern</returns>
-        public static String RegExpReplace(this String input, String pattern, String replacement, RegexOptions options = RegexOptions.None)
+        public static String RegExpReplace(this String input, [RegexPattern] String pattern, [RegexPattern] String replacement, RegexOptions options = RegexOptions.None)
         {
             return Regex.Replace(input, pattern, replacement, options);
         }
